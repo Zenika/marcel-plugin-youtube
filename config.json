@@ -1,0 +1,15 @@
+{
+  "name": "Youtube",
+  "description": "Launch youtube videos with websocket requests",
+  "elementName": "marcel-plugin-youtube",
+  "files": ["index.html"],
+  "icon": "",
+  "props": [
+    {
+      "name": "weather_url",
+      "description": "Url of the api for the weather data",
+      "type": "string",
+      "defaultValue": "http://localhost:8080"
+    }
+  ]
+}

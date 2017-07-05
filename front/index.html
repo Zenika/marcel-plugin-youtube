@@ -1,7 +1,9 @@
-<link rel="import" href="/bower_components/google-youtube/google-youtube.html">
+<link rel="import" href="./bower_components/polymer/polymer-element.html">
+<link rel="import" href="./bower_components/google-youtube/google-youtube.html">
+
 <script src="./socketio.js"></script>
 
-<dom-module id="youtube-item">
+<dom-module id="marcel-plugin-youtube">
   <template>
     <style>
       :host {
@@ -20,7 +22,7 @@
   <script>
     (() => {
       class Youtube extends Polymer.Element {
-        static get is() { return 'youtube-item' }
+        static get is() { return 'marcel-plugin-youtube' }
 
         static get properties() {
           return {
