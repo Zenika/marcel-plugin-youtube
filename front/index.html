@@ -1,8 +1,6 @@
 <link rel="import" href="./bower_components/polymer/polymer-element.html">
 <link rel="import" href="./bower_components/google-youtube/google-youtube.html">
 
-<script src="./socketio.js"></script>
-
 <dom-module id="marcel-plugin-youtube">
   <template>
     <style>
@@ -36,21 +34,26 @@
         connectedCallback() {
           super.connectedCallback();
 
-          this.socket = io.connect(this.socket_url);
+          this.socket = new WebSocket(this.socket_url);
 
-          this.socket.on('close', () => this._hide());
-          this.socket.on('youtube', (request) => this._handleRequest(request));
+          this.socket.onmessage = (event) => {
+            const msg = event.data;
+            this._handleRequest(msg)
+          }
         }
 
         _handleRequest (req) {
           switch (req.type) {
-            case 'search':
-              this._searchVideo(req.content);
+            case 'CloseDisplayed':
+              this._hide();
               break;
-            case 'pause':
+            case 'YoutubeSearch':
+              this._searchVideo(req.content.video);
+              break;
+            case 'YoutubePause':
               this._pauseVideo();
               break;
-            case 'play':
+            case 'YoutubePlay':
               this._playVideo();
               break;
             case 'stop':
